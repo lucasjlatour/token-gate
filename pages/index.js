@@ -1,4 +1,5 @@
 import { useAccount, useConnect, useDisconnect, useEnsName } from 'wagmi';
+import Link from 'next/link'
 
 const Home = () => {
   const { data: account } = useAccount();
@@ -13,20 +14,25 @@ const Home = () => {
         <div>
           {ensName ? `${ensName} (${account.address})` : account.address}
         </div>
+        
         <div>Connected to {account?.connector?.name}</div>
+        
         <button
           className='rounded bg-slate-200 p-2'
           onClick={() => disconnect()}
         >
           Disconnect
         </button>
+        
+        <AccessSection />
       </div>
+
     );
   }
 
   return (
     <div className='py-24 text-center'>
-      <h1 className='text-2xl font-bold'>Welcome to create-web3-frontend</h1>
+      <h1 className='text-2xl font-bold'>Welcome to super secret group</h1>
       <p className='mt-10'>Connect your wallet:</p>
       <div className='mt-5 flex justify-center gap-6'>
         {connectors.map((connector) => {
@@ -47,39 +53,21 @@ const Home = () => {
       </div>
 
       {error && <div>{error.message}</div>}
-
-      <InfoSection />
     </div>
   );
 };
 
-const InfoSection = () => {
+const AccessSection = () => {
   return (
     <div className='mt-10'>
       <hr className='my-4' />
-      <h2 className='text-xl font-bold'>If you need help</h2>
-      <div className='flex flex-col gap-2 mt-2'>
-        <a
-          href='https://wagmi.sh'
-          target='_blank'
-          className='underline text-gray-600'
-        >
-          Link to wagmi docs
-        </a>
-        <a
-          href='https://github.com/dhaiwat10/create-web3-frontend'
-          target='_blank'
-          className='underline text-gray-600'
-        >
-          Open an issue on Github
-        </a>
-        <a
-          href='https://twitter.com/dhaiwat10'
-          target='_blank'
-          className='underline text-gray-600'
-        >
-          DM me on Twitter
-        </a>
+      <h2 className='text-xl font-bold'>Access Site with NFT</h2>
+      <div className='mt-5 flex justify-center gap-6'>
+        <button className='rounded bg-slate-200 p-2'>
+        <Link href="/gated">
+          <a>Connect</a>
+        </Link>
+        </button>
       </div>
     </div>
   );
